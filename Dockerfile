@@ -1,25 +1,14 @@
+# Usando uma imagem base com Java 17
+FROM openjdk:17-jdk-slim
 
-# PEGA O maven da img do maven e chama ele de build
-FROM maven:3.8.4-jdk-8 AS build 
-
-
-# copia todos os arquivos de src e manda pra app
-COPY src /app/src
-COPY pom.xml /app
-
-# faz a instalação e build do projeto
+# Definindo o diretório de trabalho
 WORKDIR /app
-RUN mvn clean install
 
-# instala o jre 
-FROM openjdk:8-jre-alpine
+# Copiando o arquivo jar gerado pelo Maven
+COPY target/meu-projeto-spring.jar /app/meu-projeto-spring.jar
 
-# copiamos de dentro de build nosso jar e mandamos para a pasta app
-COPY --from=build /app/target/nomeDaApp.jar /app/app.jar
-
-# trocamos e expomos que sera na porta 8080
-WORKDIR /app
+# Expõe a porta em que o Spring Boot vai rodar
 EXPOSE 8080
 
-# comandos finais que serão executados na inicialização do container.
-CMD ["java", "-jar", "app.jar"]
+# Comando para rodar a aplicação Spring Boot
+ENTRYPOINT ["java", "-jar", "meu-projeto-spring.jar"]
