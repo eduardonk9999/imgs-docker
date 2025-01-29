@@ -4,7 +4,7 @@ Este projeto é uma aplicação **Spring Boot** com **Java 17**, configurada par
 
 Projeto base, para usar nos meus projetos spring.
 
-## 📋 Pré-requisitos
+## 📋 Pré-requisitos:
 
 Antes de começar, certifique-se de ter o seguinte instalado:
 
